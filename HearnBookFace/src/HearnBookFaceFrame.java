@@ -30,8 +30,6 @@ public class HearnBookFaceFrame extends JFrame {
 	private final JMenuItem mntmExit = new JMenuItem("Exit");
 	private final JMenu mnTools = new JMenu("Tools");
 	private final JMenuItem mntmAddBook = new JMenuItem("Add Book");
-	private final JMenuItem mntmSetSort = new JMenuItem("Set Sort");
-	private final JMenuItem mntmSetFilter = new JMenuItem("Set Filter");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JLabel lblCurrentBookInventory = new JLabel("Current Book Face Inventory");
 	private final JTable InventoryTB = new JTable();
@@ -39,7 +37,15 @@ public class HearnBookFaceFrame extends JFrame {
 	private final JButton btnSetDefault = new JButton("Set Default");
 	public static String baseQuery = "SELECT BookID, BookName, AuthorName, Category, WholesalePrice, RetailPrice, QOH, "
 			+ "MinQuant FROM Inventory WHERE 1 = 1";
-
+	private final JMenu mnSetSort = new JMenu("Set Sort");
+	private final JMenuItem mntmByBookName = new JMenuItem("By Book Name");
+	private final JMenuItem mntmByRetailPrice = new JMenuItem("By Retail Price");
+	private final JMenuItem mntmByCategory = new JMenuItem("By Category");
+	private final JMenu mnSetFilter = new JMenu("Set Filter");
+	private final JMenuItem mntmByRetailPrice_1 = new JMenuItem("By Retail Price");
+	private final JMenuItem mntmByCategory_1 = new JMenuItem("By Category");
+	public static String priceSort = "AND RetailPrice ";
+	public String finalQuery = "";
 	/**
 	 * Launch the application.
 	 */
@@ -61,6 +67,7 @@ public class HearnBookFaceFrame extends JFrame {
 	 */
 	public HearnBookFaceFrame() {
 		jbInit();
+		queryUpdate(baseQuery);
 	}
 	private void jbInit() {
 		setTitle("HearnBookFace");
@@ -77,9 +84,24 @@ public class HearnBookFaceFrame extends JFrame {
 		
 		mnTools.add(mntmAddBook);
 		
-		mnTools.add(mntmSetSort);
+		mnTools.add(mnSetSort);
 		
-		mnTools.add(mntmSetFilter);
+		mnSetSort.add(mntmByBookName);
+		
+		mnSetSort.add(mntmByRetailPrice);
+		
+		mnSetSort.add(mntmByCategory);
+		
+		mnTools.add(mnSetFilter);
+		mntmByRetailPrice_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmByRetailPrice_1_actionPerformed(e);
+			}
+		});
+		
+		mnSetFilter.add(mntmByRetailPrice_1);
+		
+		mnSetFilter.add(mntmByCategory_1);
 		
 		menuBar.add(mnHelp);
 		contentPane = new JPanel();
@@ -162,9 +184,16 @@ public class HearnBookFaceFrame extends JFrame {
 		} 
 			
 		}
-		
+	public void finalQuery() {
+		finalQuery = baseQuery;
+		if()
+	}
 		
 	protected void do_btnSetDefault_actionPerformed(ActionEvent arg0) {
 		queryUpdate(baseQuery);
+	}
+	protected void do_mntmByRetailPrice_1_actionPerformed(ActionEvent e) {
+		HearnRetailPrice newFrame = new HearnRetailPrice();
+		newFrame.setVisible(true);
 	}
 	}

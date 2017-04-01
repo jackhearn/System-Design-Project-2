@@ -9,10 +9,18 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HearnBookFaceFrame extends JFrame {
 
@@ -26,9 +34,11 @@ public class HearnBookFaceFrame extends JFrame {
 	private final JMenuItem mntmSetFilter = new JMenuItem("Set Filter");
 	private final JMenu mnHelp = new JMenu("Help");
 	private final JLabel lblCurrentBookInventory = new JLabel("Current Book Face Inventory");
-	private final JTable table = new JTable();
+	private final JTable InventoryTB = new JTable();
 	private final JScrollPane scrollPane = new JScrollPane();
 	private final JButton btnSetDefault = new JButton("Set Default");
+	public static String baseQuery = "SELECT BookID, BookName, AuthorName, Category, WholesalePrice, RetailPrice, QOH, "
+			+ "MinQuant FROM Inventory WHERE 1 = 1";
 
 	/**
 	 * Launch the application.
@@ -83,8 +93,8 @@ public class HearnBookFaceFrame extends JFrame {
 		scrollPane.setBounds(10, 50, 703, 292);
 		
 		contentPane.add(scrollPane);
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
+		scrollPane.setViewportView(InventoryTB);
+		InventoryTB.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null, null, null, null},
 			},
@@ -93,17 +103,68 @@ public class HearnBookFaceFrame extends JFrame {
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Integer.class, String.class, String.class, String.class, Object.class, Object.class, Integer.class, Integer.class
+				Integer.class, String.class, String.class, String.class, Double.class, Double.class, Integer.class, Integer.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
-		table.getColumnModel().getColumn(0).setPreferredWidth(55);
-		table.getColumnModel().getColumn(1).setPreferredWidth(96);
-		table.getColumnModel().getColumn(2).setPreferredWidth(100);
+		InventoryTB.getColumnModel().getColumn(0).setPreferredWidth(55);
+		InventoryTB.getColumnModel().getColumn(1).setPreferredWidth(96);
+		InventoryTB.getColumnModel().getColumn(2).setPreferredWidth(100);
+		btnSetDefault.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				do_btnSetDefault_actionPerformed(arg0);
+			}
+		});
 		btnSetDefault.setBounds(552, 7, 131, 31);
 		
 		contentPane.add(btnSetDefault);
 	}
-}
+	public void queryUpdate(String s) {
+		ResultSet rs = null;
+		Statement stmt = null;
+		// establish the connection
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:/Users/Public/HearnBookFace.accdb");
+			// Create the Statement
+			stmt = conn.createStatement();
+			// Print statement to console 
+			System.out.println(s);
+			// Execute the statement
+			rs = stmt.executeQuery(s);
+			// Process your result
+			// remove previously added rows
+			while(InventoryTB.getRowCount() > 0) {
+				((DefaultTableModel) InventoryTB.getModel()).removeRow(0);
+			}
+			
+			int col = rs.getMetaData().getColumnCount();
+			while (rs.next()){
+				Object[] entry = new Object[col];
+				//get record fields 
+				for (int i = 0; i < col; i++) {
+					entry[i] = rs.getObject(i + 1);
+				}
+				//insert entry into food 
+				((DefaultTableModel) InventoryTB.getModel()).insertRow(rs.getRow() - 1, entry);
+			}
+			// clean up 
+			rs.close();
+			conn.close();
+			
+		} catch (SQLException ex)
+		{
+			System.out.println("SQL Exception: " + ex.getMessage());
+			System.out.println("SQL State: " + ex.getSQLState());
+			System.out.println("Vendor Error: " + ex.getErrorCode());
+			ex.printStackTrace();
+		} 
+			
+		}
+		
+		
+	protected void do_btnSetDefault_actionPerformed(ActionEvent arg0) {
+		queryUpdate(baseQuery);
+	}
+	}

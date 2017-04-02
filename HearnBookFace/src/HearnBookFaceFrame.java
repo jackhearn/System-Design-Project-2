@@ -81,6 +81,11 @@ public class HearnBookFaceFrame extends JFrame {
 		mnFile.add(mntmExit);
 		
 		menuBar.add(mnTools);
+		mntmAddBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmAddBook_actionPerformed(e);
+			}
+		});
 		
 		mnTools.add(mntmAddBook);
 		
@@ -100,6 +105,11 @@ public class HearnBookFaceFrame extends JFrame {
 		});
 		
 		mnSetFilter.add(mntmByRetailPrice_1);
+		mntmByCategory_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmByCategory_1_actionPerformed(e);
+			}
+		});
 		
 		mnSetFilter.add(mntmByCategory_1);
 		
@@ -194,6 +204,14 @@ public class HearnBookFaceFrame extends JFrame {
 	}
 	protected void do_mntmByRetailPrice_1_actionPerformed(ActionEvent e) {
 		HearnRetailPrice newFrame = new HearnRetailPrice();
+		newFrame.setVisible(true);
+	}
+	protected void do_mntmAddBook_actionPerformed(ActionEvent e) {
+		AddJFrame newFrame = new AddJFrame();
+		newFrame.setVisible(true);
+	}
+	protected void do_mntmByCategory_1_actionPerformed(ActionEvent e) {
+		HearnCatsFilter newFrame = new HearnCatsFilter();
 		newFrame.setVisible(true);
 	}
 	}

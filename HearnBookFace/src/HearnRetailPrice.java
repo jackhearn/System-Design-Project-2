@@ -98,7 +98,7 @@ public class HearnRetailPrice extends JFrame {
 		if(rdbtnLessThan.isSelected() || rdbtnMoreThan.isSelected() || rdbtnInBetween.isSelected()){
 			HearnBookFaceFrame.priceSort += " AND RetailPrice";
 		}
-		
+		// sees what is selected and applies the correct query
 		if(rdbtnLessThan.isSelected()){
 			HearnBookFaceFrame.priceSort += " < " + lessthanFTF.getValue() + " ";
 		} else if (rdbtnMoreThan.isSelected()){

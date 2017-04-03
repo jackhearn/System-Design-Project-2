@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.sql.Connection;
@@ -52,6 +53,7 @@ public class HearnBookFaceFrame extends JFrame {
 	public static String sortBook = "";
 	public static String retailPrice = "";
 	public static String category = "";
+	private final JMenuItem mntmAddBookHelp = new JMenuItem("Add Book Help");
 	/**
 	 * Launch the application.
 	 */
@@ -147,6 +149,13 @@ public class HearnBookFaceFrame extends JFrame {
 		mnSetFilter.add(mntmByCategory_1);
 		
 		menuBar.add(mnHelp);
+		mntmAddBookHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				do_mntmAddBookHelp_actionPerformed(arg0);
+			}
+		});
+		
+		mnHelp.add(mntmAddBookHelp);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -227,27 +236,33 @@ public class HearnBookFaceFrame extends JFrame {
 		} 
 			
 	}	
+	// makes the everything go back to default
 	protected void do_btnSetDefault_actionPerformed(ActionEvent arg0) {
 		queryUpdate(baseQuery);
 	}
+	// pulls retail price filter window up
 	protected void do_mntmByRetailPrice_1_actionPerformed(ActionEvent e) {
 		HearnRetailPrice newFrame = new HearnRetailPrice();
 		newFrame.setVisible(true);
 	}
+	// pulls add book option frame up
 	protected void do_mntmAddBook_actionPerformed(ActionEvent e) {
 		AddJFrame newFrame = new AddJFrame();
 		newFrame.setVisible(true);
 	}
+	// pulls category filter up
 	protected void do_mntmByCategory_1_actionPerformed(ActionEvent e) {
 		HearnCatsFilter newFrame = new HearnCatsFilter();
 		newFrame.setVisible(true);
 	}
+	// when ever the frame is in focus it updates the window
 	protected void do_this_windowGainedFocus(WindowEvent arg0) {
 		finalQuery();
 	}
 	protected void do_mntmExit_actionPerformed(ActionEvent e) {
 		this.dispose();
 	}
+	// order by bookname, resets all order bys and orders it by bookname
 	protected void do_mntmByBookName_actionPerformed(ActionEvent e) {
 		HearnBookFaceFrame.sortBook = "";
 		HearnBookFaceFrame.retailPrice = "";
@@ -255,6 +270,7 @@ public class HearnBookFaceFrame extends JFrame {
 		HearnBookFaceFrame.sortBook = " ORDER BY BookName ";
 		finalQuery();
 	}
+	//oder by retail price code
 	protected void do_mntmByRetailPrice_actionPerformed(ActionEvent e) {
 		HearnBookFaceFrame.sortBook = "";
 		HearnBookFaceFrame.retailPrice = "";
@@ -262,6 +278,7 @@ public class HearnBookFaceFrame extends JFrame {
 		HearnBookFaceFrame.retailPrice = " ORDER BY RetailPrice ";
 		finalQuery();
 	}
+	//oder by category code
 	protected void do_mntmByCategory_actionPerformed(ActionEvent e) {
 		HearnBookFaceFrame.sortBook = "";
 		HearnBookFaceFrame.retailPrice = "";
@@ -269,10 +286,20 @@ public class HearnBookFaceFrame extends JFrame {
 		HearnBookFaceFrame.retailPrice = " ORDER BY Category ";
 		finalQuery();
 	}
+	// assembles all parts of the query and then sends it to queryUpdate
 	private void finalQuery(){
 		finalQuery = baseQuery + priceSort + checked + sortBook + retailPrice + category;
 		queryUpdate(finalQuery);
 		System.out.println(finalQuery);
 	}
-	
+	protected void do_mntmAddBookHelp_actionPerformed(ActionEvent arg0) {
+		JOptionPane.showMessageDialog(this, "Book ID: Must be a unique number"
+			+ "\nBook Name: Must be a unique String"
+			+ "\nAuthor Name: Can be any string"
+			+ "\nCategory: Must be one of selections on the list"
+			+ "\nWholesale Price: Any number"
+			+ "\nRetailPrice: Any Number"
+			+ "\nQOH (Quanity On Hand): Any Number"
+			+ "\nMinQuant: Any Number" , "Add Book Help" , getDefaultCloseOperation());
+	}
 	}

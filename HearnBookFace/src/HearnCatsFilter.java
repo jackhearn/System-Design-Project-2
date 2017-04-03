@@ -97,14 +97,17 @@ public class HearnCatsFilter extends JFrame {
 		
 		contentPane.add(btnCancel);
 	}
+
 	public void checkBoxCheck(){
+		// resets checkbox checker
 		HearnBookFaceFrame.checked = "";
+			// Checks if a checkbox is checked and adds code
 		if(chckbxHumor.isSelected() || chckbxBiography.isSelected() || chckbxAutobiography.isSelected() || chckbxLiterature.isSelected()
 				|| chckbxMystery.isSelected() || chckbxGraphicnovel.isSelected() || chckbxYoungadult.isSelected() || chckbxScifi.isSelected()
 				|| chckbxRomance.isSelected() || chckbxOther.isSelected()){
 			HearnBookFaceFrame.checked += " AND ( 1 = 0 ";
 		}
-		
+		// runs through all check boxs and sees what is checked
 		if (chckbxHumor.isSelected()){
 			HearnBookFaceFrame.checked += " OR Category = 'Humor'";
 			}
@@ -135,6 +138,7 @@ public class HearnCatsFilter extends JFrame {
 		if(chckbxOther.isSelected()){
 			HearnBookFaceFrame.checked += " OR Category = 'Other'";
 		}
+		// if something is checked add a ")"
 		if(chckbxHumor.isSelected() || chckbxBiography.isSelected() || chckbxAutobiography.isSelected() || chckbxLiterature.isSelected()
 				|| chckbxMystery.isSelected() || chckbxGraphicnovel.isSelected() || chckbxYoungadult.isSelected() || chckbxScifi.isSelected()
 				|| chckbxRomance.isSelected() || chckbxOther.isSelected()){

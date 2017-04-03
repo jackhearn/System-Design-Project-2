@@ -13,6 +13,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HearnCatsFilter extends JFrame {
 
@@ -78,27 +80,74 @@ public class HearnCatsFilter extends JFrame {
 		chckbxRomance.setBounds(240, 100, 129, 36);
 		
 		contentPane.add(chckbxRomance);
+		btnok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnok_actionPerformed(e);
+			}
+		});
 		btnok.setBounds(30, 200, 131, 31);
 		
 		contentPane.add(btnok);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_btnCancel_actionPerformed(e);
+			}
+		});
 		btnCancel.setBounds(229, 200, 131, 31);
 		
 		contentPane.add(btnCancel);
 	}
 	public void checkBoxCheck(){
-		String checked = null;
-		if (chckbxHumor.isSelected()){
-			checked += " OR Category = Humor";
-			}
-		if (chckbxBiography.isSelected()){
-			checked += " OR Category = Biography";
-		}
-		if (chckbxAutobiography.isSelected()){
-			checked += " OR Category = Autobiography";
-		}
-		if (chckbxHumor.isSelected() == false && chckbxBiography.isSelected() == false && chckbxAutobiography.isSelected() == false){
-			checked = "";
+		HearnBookFaceFrame.checked = "";
+		if(chckbxHumor.isSelected() || chckbxBiography.isSelected() || chckbxAutobiography.isSelected() || chckbxLiterature.isSelected()
+				|| chckbxMystery.isSelected() || chckbxGraphicnovel.isSelected() || chckbxYoungadult.isSelected() || chckbxScifi.isSelected()
+				|| chckbxRomance.isSelected() || chckbxOther.isSelected()){
+			HearnBookFaceFrame.checked += "AND ( 1 = 0";
 		}
 		
+		if (chckbxHumor.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'Humor'";
+			}
+		if (chckbxBiography.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'Biography'";
+		}
+		if (chckbxAutobiography.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'Autobiography'";
+			}
+		if(chckbxLiterature.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'Literature'";
+		}
+		if(chckbxMystery.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'Mystery'";
+		}
+		if(chckbxGraphicnovel.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'GraphicNovel'";
+		}
+		if(chckbxYoungadult.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'YoungAdult'";
+		}
+		if(chckbxScifi.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'SciFi'";
+		}
+		if(chckbxRomance.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'Romance'";
+		}
+		if(chckbxOther.isSelected()){
+			HearnBookFaceFrame.checked += " OR Category = 'Other'";
+		}
+		if(chckbxHumor.isSelected() || chckbxBiography.isSelected() || chckbxAutobiography.isSelected() || chckbxLiterature.isSelected()
+				|| chckbxMystery.isSelected() || chckbxGraphicnovel.isSelected() || chckbxYoungadult.isSelected() || chckbxScifi.isSelected()
+				|| chckbxRomance.isSelected() || chckbxOther.isSelected()){
+			HearnBookFaceFrame.checked += " )";
+		}
+		
+		
+	}
+	protected void do_btnok_actionPerformed(ActionEvent e) {
+		checkBoxCheck();
+		this.dispose();
+	}
+	protected void do_btnCancel_actionPerformed(ActionEvent e) {
+		this.dispose();
 	}
 }

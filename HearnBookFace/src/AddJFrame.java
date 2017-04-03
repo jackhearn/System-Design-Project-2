@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.NumberFormat;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AddJFrame extends JFrame {
-
+	NumberFormat numFormat = NumberFormat.getNumberInstance();
 	private JPanel contentPane;
 	private final JLabel lblBookId = new JLabel("Book ID:");
 	private final JLabel lblBookName = new JLabel("Book Name:");
@@ -32,14 +33,14 @@ public class AddJFrame extends JFrame {
 	private final JLabel lblRetailPrice = new JLabel("Retail Price:");
 	private final JLabel lblQoh = new JLabel("QOH:");
 	private final JLabel lblMinQuantity = new JLabel("Min Quantity:");
-	private final JFormattedTextField bookIDFTF = new JFormattedTextField();
+	private final JFormattedTextField bookIDFTF = new JFormattedTextField(numFormat);
 	private final JFormattedTextField bookNameFTF = new JFormattedTextField();
 	private final JFormattedTextField authornameFTF = new JFormattedTextField();
 	private final JComboBox categoryCB = new JComboBox();
-	private final JFormattedTextField wholeSalePriceFTF = new JFormattedTextField();
-	private final JFormattedTextField retailPriceFTF = new JFormattedTextField();
-	private final JFormattedTextField qohFTF = new JFormattedTextField();
-	private final JFormattedTextField minQuantityFTF = new JFormattedTextField();
+	private final JFormattedTextField wholeSalePriceFTF = new JFormattedTextField(numFormat);
+	private final JFormattedTextField retailPriceFTF = new JFormattedTextField(numFormat);
+	private final JFormattedTextField qohFTF = new JFormattedTextField(numFormat);
+	private final JFormattedTextField minQuantityFTF = new JFormattedTextField(numFormat);
 	private final JButton btnOk = new JButton("OK");
 	private final JButton btnCancel = new JButton("Cancel");
 
@@ -157,7 +158,7 @@ public class AddJFrame extends JFrame {
 			// Process your result
 			//Pop up that says that you entered in duplicate data
 			if(rs.next()) {
-				JOptionPane.showConfirmDialog(this, "A BookID Or BookName has already been entered");
+				JOptionPane.showMessageDialog(this, "A BookID Or BookName has already been entered");
 			} else {
 				//time to insert data
 				stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -200,5 +201,6 @@ public class AddJFrame extends JFrame {
 	}
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
 		addfunction();
+		this.dispose();
 	}
 }

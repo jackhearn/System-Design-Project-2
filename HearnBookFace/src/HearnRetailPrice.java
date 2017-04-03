@@ -10,19 +10,20 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 public class HearnRetailPrice extends JFrame {
-
+	NumberFormat numFormat = NumberFormat.getNumberInstance();
 	private JPanel contentPane;
 	private final JRadioButton rdbtnLessThan = new JRadioButton("Less Than");
 	private final JRadioButton rdbtnMoreThan = new JRadioButton("More than");
 	private final JRadioButton rdbtnInBetween = new JRadioButton("In Between");
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private final JFormattedTextField lessthanFTF = new JFormattedTextField();
-	private final JFormattedTextField morethanFTF = new JFormattedTextField();
-	private final JFormattedTextField inBetween1FTF = new JFormattedTextField();
+	private final JFormattedTextField lessthanFTF = new JFormattedTextField(numFormat);
+	private final JFormattedTextField morethanFTF = new JFormattedTextField(numFormat);
+	private final JFormattedTextField inBetween1FTF = new JFormattedTextField(numFormat);
 	private final JButton btnOk = new JButton("OK");
 	private final JButton btnCancel = new JButton("Cancel");
 	private final JLabel lblAnd = new JLabel("And");

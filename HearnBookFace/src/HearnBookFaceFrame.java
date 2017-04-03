@@ -21,6 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class HearnBookFaceFrame extends JFrame {
 
@@ -44,8 +46,9 @@ public class HearnBookFaceFrame extends JFrame {
 	private final JMenu mnSetFilter = new JMenu("Set Filter");
 	private final JMenuItem mntmByRetailPrice_1 = new JMenuItem("By Retail Price");
 	private final JMenuItem mntmByCategory_1 = new JMenuItem("By Category");
-	public static String priceSort = "AND RetailPrice ";
-	public String finalQuery = "";
+	public static String priceSort = " ";
+	public static String finalQuery = "";
+	public static String checked = " ";
 	/**
 	 * Launch the application.
 	 */
@@ -66,6 +69,13 @@ public class HearnBookFaceFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public HearnBookFaceFrame() {
+		addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent arg0) {
+				do_this_windowGainedFocus(arg0);
+			}
+			public void windowLostFocus(WindowEvent arg0) {
+			}
+		});
 		jbInit();
 		queryUpdate(baseQuery);
 	}
@@ -77,6 +87,11 @@ public class HearnBookFaceFrame extends JFrame {
 		setJMenuBar(menuBar);
 		
 		menuBar.add(mnFile);
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmExit_actionPerformed(e);
+			}
+		});
 		
 		mnFile.add(mntmExit);
 		
@@ -194,9 +209,9 @@ public class HearnBookFaceFrame extends JFrame {
 		} 
 			
 		}
-	public void finalQuery() {
-		finalQuery = baseQuery;
-		if()
+	public static void finalQuery() {
+		finalQuery = baseQuery + priceSort + checked;
+		
 	}
 		
 	protected void do_btnSetDefault_actionPerformed(ActionEvent arg0) {
@@ -213,5 +228,12 @@ public class HearnBookFaceFrame extends JFrame {
 	protected void do_mntmByCategory_1_actionPerformed(ActionEvent e) {
 		HearnCatsFilter newFrame = new HearnCatsFilter();
 		newFrame.setVisible(true);
+	}
+	protected void do_this_windowGainedFocus(WindowEvent arg0) {
+		finalQuery();
+		System.out.println(finalQuery);
+	}
+	protected void do_mntmExit_actionPerformed(ActionEvent e) {
+		this.dispose();
 	}
 	}

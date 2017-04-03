@@ -90,31 +90,40 @@ public class AddJFrame extends JFrame {
 		lblMinQuantity.setBounds(17, 187, 82, 23);
 		
 		contentPane.add(lblMinQuantity);
+		bookIDFTF.setToolTipText("Must not match any other BookID. Only Numbers.");
 		bookIDFTF.setBounds(125, 17, 113, 23);
 		
 		contentPane.add(bookIDFTF);
+		bookNameFTF.setToolTipText("Must not match any other BookName.");
 		bookNameFTF.setBounds(125, 43, 113, 23);
 		
 		contentPane.add(bookNameFTF);
+		authornameFTF.setToolTipText("Can match existing author.");
 		authornameFTF.setBounds(125, 67, 113, 23);
 		
 		contentPane.add(authornameFTF);
+		categoryCB.setToolTipText("Please choose one category");
 		categoryCB.setModel(new DefaultComboBoxModel(new String[] {"Humor", "Biography", "Autobiography", "Literature", "Mystery", "GraphicNovel", "YoungAdult", "Romance", "SciFi", "Other"}));
 		categoryCB.setBounds(125, 91, 122, 23);
 		
 		contentPane.add(categoryCB);
+		wholeSalePriceFTF.setToolTipText("Only Numbers");
 		wholeSalePriceFTF.setBounds(125, 115, 113, 23);
 		
 		contentPane.add(wholeSalePriceFTF);
+		retailPriceFTF.setToolTipText("Only Numbers");
 		retailPriceFTF.setBounds(125, 139, 113, 23);
 		
 		contentPane.add(retailPriceFTF);
+		qohFTF.setToolTipText("Only Numbers");
 		qohFTF.setBounds(125, 163, 113, 23);
 		
 		contentPane.add(qohFTF);
+		minQuantityFTF.setToolTipText("Only Numbers");
 		minQuantityFTF.setBounds(125, 187, 113, 23);
 		
 		contentPane.add(minQuantityFTF);
+		btnOk.setToolTipText("Submit addition ");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnOk_actionPerformed(e);
@@ -123,6 +132,7 @@ public class AddJFrame extends JFrame {
 		btnOk.setBounds(17, 217, 131, 31);
 		
 		contentPane.add(btnOk);
+		btnCancel.setToolTipText("Cancel Addition");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnCancel_actionPerformed(e);

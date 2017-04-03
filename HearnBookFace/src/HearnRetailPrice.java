@@ -58,15 +58,19 @@ public class HearnRetailPrice extends JFrame {
 		rdbtnInBetween.setBounds(13, 103, 102, 31);
 		
 		contentPane.add(rdbtnInBetween);
+		lessthanFTF.setToolTipText("Enter a price to be your maximum *Only Numbers*");
 		lessthanFTF.setBounds(130, 27, 102, 29);
 		
 		contentPane.add(lessthanFTF);
+		morethanFTF.setToolTipText("Enter a price to be your minimum *Only Numbers*");
 		morethanFTF.setBounds(130, 64, 102, 29);
 		
 		contentPane.add(morethanFTF);
+		inBetween1FTF.setToolTipText("Must be smaller than other number.");
 		inBetween1FTF.setBounds(130, 101, 102, 29);
 		
 		contentPane.add(inBetween1FTF);
+		btnOk.setToolTipText("Submit Filter");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnOk_actionPerformed(e);
@@ -75,6 +79,7 @@ public class HearnRetailPrice extends JFrame {
 		btnOk.setBounds(45, 162, 131, 31);
 		
 		contentPane.add(btnOk);
+		btnCancel.setToolTipText("Cancel Filter");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnCancel_actionPerformed(e);
@@ -86,6 +91,7 @@ public class HearnRetailPrice extends JFrame {
 		lblAnd.setBounds(236, 104, 42, 23);
 		
 		contentPane.add(lblAnd);
+		inBetween2FTF.setToolTipText("Must be larger that first number");
 		inBetween2FTF.setBounds(277, 101, 102, 29);
 		
 		contentPane.add(inBetween2FTF);

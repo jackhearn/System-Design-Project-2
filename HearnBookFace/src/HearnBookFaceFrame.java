@@ -54,6 +54,8 @@ public class HearnBookFaceFrame extends JFrame {
 	public static String retailPrice = "";
 	public static String category = "";
 	private final JMenuItem mntmAddBookHelp = new JMenuItem("Add Book Help");
+	private final JMenuItem mntmSetSortHelp = new JMenuItem("Set Sort Help");
+	private final JMenuItem mntmSetFilterHelp = new JMenuItem("Set Filter Help");
 	/**
 	 * Launch the application.
 	 */
@@ -156,6 +158,20 @@ public class HearnBookFaceFrame extends JFrame {
 		});
 		
 		mnHelp.add(mntmAddBookHelp);
+		mntmSetSortHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmSetSortHelp_actionPerformed(e);
+			}
+		});
+		
+		mnHelp.add(mntmSetSortHelp);
+		mntmSetFilterHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmSetFilterHelp_actionPerformed(e);
+			}
+		});
+		
+		mnHelp.add(mntmSetFilterHelp);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -301,5 +317,17 @@ public class HearnBookFaceFrame extends JFrame {
 			+ "\nRetailPrice: Any Number"
 			+ "\nQOH (Quanity On Hand): Any Number"
 			+ "\nMinQuant: Any Number" , "Add Book Help" , getDefaultCloseOperation());
+	}
+	protected void do_mntmSetSortHelp_actionPerformed(ActionEvent e) {
+		JOptionPane.showMessageDialog(this, "Select 'By BookName, By RetailPrice or By Category"
+				+ "\n to display what order the results are in.", "Set Sort Help", getDefaultCloseOperation());
+	}
+	protected void do_mntmSetFilterHelp_actionPerformed(ActionEvent e) {
+		JOptionPane.showMessageDialog(this, "To Filter by Retail Price,"
+				+ "\n select less than, more than or in between"
+				+ "\n a certain price or prices and hit 'OK'"
+				+ "\n \n To Fliter by Category pick the categorys"
+				+ "\n you wish to fillter and hit 'OK'"
+				+ "\n *NOTE*: you may use both filters at the same time" , "Set Filter Help", getDefaultCloseOperation());
 	}
 	}

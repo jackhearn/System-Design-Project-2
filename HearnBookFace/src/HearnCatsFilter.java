@@ -80,6 +80,7 @@ public class HearnCatsFilter extends JFrame {
 		chckbxRomance.setBounds(240, 100, 129, 36);
 		
 		contentPane.add(chckbxRomance);
+		btnok.setToolTipText("Submit Filters");
 		btnok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnok_actionPerformed(e);
@@ -88,6 +89,7 @@ public class HearnCatsFilter extends JFrame {
 		btnok.setBounds(30, 200, 131, 31);
 		
 		contentPane.add(btnok);
+		btnCancel.setToolTipText("Cancel Filters");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				do_btnCancel_actionPerformed(e);

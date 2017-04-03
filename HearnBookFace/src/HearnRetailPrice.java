@@ -27,7 +27,7 @@ public class HearnRetailPrice extends JFrame {
 	private final JButton btnOk = new JButton("OK");
 	private final JButton btnCancel = new JButton("Cancel");
 	private final JLabel lblAnd = new JLabel("And");
-	private final JFormattedTextField inBetween2FTF = new JFormattedTextField();
+	private final JFormattedTextField inBetween2FTF = new JFormattedTextField(numFormat);
 
 	/**
 	 * Create the frame.
@@ -94,12 +94,18 @@ public class HearnRetailPrice extends JFrame {
 		this.dispose();
 	}
 	protected void do_btnOk_actionPerformed(ActionEvent e) {
+		HearnBookFaceFrame.priceSort = "";
+		if(rdbtnLessThan.isSelected() || rdbtnMoreThan.isSelected() || rdbtnInBetween.isSelected()){
+			HearnBookFaceFrame.priceSort += " AND RetailPrice";
+		}
+		
 		if(rdbtnLessThan.isSelected()){
 			HearnBookFaceFrame.priceSort += " < " + lessthanFTF.getValue() + " ";
 		} else if (rdbtnMoreThan.isSelected()){
 			HearnBookFaceFrame.priceSort += " > " + morethanFTF.getValue() + " ";
 		} else if (rdbtnInBetween.isSelected()) { 
-			HearnBookFaceFrame.priceSort += "BETWEEN" + inBetween1FTF.getValue() + " AND " + inBetween2FTF.getValue(); 
+			HearnBookFaceFrame.priceSort += " BETWEEN " + inBetween1FTF.getValue() + " AND " + inBetween2FTF.getValue(); 
 		}
+		this.dispose();
 	}
 }

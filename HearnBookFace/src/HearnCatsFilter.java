@@ -102,7 +102,7 @@ public class HearnCatsFilter extends JFrame {
 		if(chckbxHumor.isSelected() || chckbxBiography.isSelected() || chckbxAutobiography.isSelected() || chckbxLiterature.isSelected()
 				|| chckbxMystery.isSelected() || chckbxGraphicnovel.isSelected() || chckbxYoungadult.isSelected() || chckbxScifi.isSelected()
 				|| chckbxRomance.isSelected() || chckbxOther.isSelected()){
-			HearnBookFaceFrame.checked += "AND ( 1 = 0";
+			HearnBookFaceFrame.checked += " AND ( 1 = 0 ";
 		}
 		
 		if (chckbxHumor.isSelected()){

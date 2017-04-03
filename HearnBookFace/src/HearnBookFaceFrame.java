@@ -49,6 +49,9 @@ public class HearnBookFaceFrame extends JFrame {
 	public static String priceSort = " ";
 	public static String finalQuery = "";
 	public static String checked = " ";
+	public static String sortBook = "";
+	public static String retailPrice = "";
+	public static String category = "";
 	/**
 	 * Launch the application.
 	 */
@@ -105,10 +108,25 @@ public class HearnBookFaceFrame extends JFrame {
 		mnTools.add(mntmAddBook);
 		
 		mnTools.add(mnSetSort);
+		mntmByBookName.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmByBookName_actionPerformed(e);
+			}
+		});
 		
 		mnSetSort.add(mntmByBookName);
+		mntmByRetailPrice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmByRetailPrice_actionPerformed(e);
+			}
+		});
 		
 		mnSetSort.add(mntmByRetailPrice);
+		mntmByCategory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				do_mntmByCategory_actionPerformed(e);
+			}
+		});
 		
 		mnSetSort.add(mntmByCategory);
 		
@@ -208,12 +226,7 @@ public class HearnBookFaceFrame extends JFrame {
 			ex.printStackTrace();
 		} 
 			
-		}
-	public static void finalQuery() {
-		finalQuery = baseQuery + priceSort + checked;
-		
-	}
-		
+	}	
 	protected void do_btnSetDefault_actionPerformed(ActionEvent arg0) {
 		queryUpdate(baseQuery);
 	}
@@ -231,9 +244,35 @@ public class HearnBookFaceFrame extends JFrame {
 	}
 	protected void do_this_windowGainedFocus(WindowEvent arg0) {
 		finalQuery();
-		System.out.println(finalQuery);
 	}
 	protected void do_mntmExit_actionPerformed(ActionEvent e) {
 		this.dispose();
 	}
+	protected void do_mntmByBookName_actionPerformed(ActionEvent e) {
+		HearnBookFaceFrame.sortBook = "";
+		HearnBookFaceFrame.retailPrice = "";
+		HearnBookFaceFrame.category = "";
+		HearnBookFaceFrame.sortBook = " ORDER BY BookName ";
+		finalQuery();
+	}
+	protected void do_mntmByRetailPrice_actionPerformed(ActionEvent e) {
+		HearnBookFaceFrame.sortBook = "";
+		HearnBookFaceFrame.retailPrice = "";
+		HearnBookFaceFrame.category = "";
+		HearnBookFaceFrame.retailPrice = " ORDER BY RetailPrice ";
+		finalQuery();
+	}
+	protected void do_mntmByCategory_actionPerformed(ActionEvent e) {
+		HearnBookFaceFrame.sortBook = "";
+		HearnBookFaceFrame.retailPrice = "";
+		HearnBookFaceFrame.category = "";
+		HearnBookFaceFrame.retailPrice = " ORDER BY Category ";
+		finalQuery();
+	}
+	private void finalQuery(){
+		finalQuery = baseQuery + priceSort + checked + sortBook + retailPrice + category;
+		queryUpdate(finalQuery);
+		System.out.println(finalQuery);
+	}
+	
 	}
